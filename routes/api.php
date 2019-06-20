@@ -16,5 +16,5 @@ use Illuminate\Http\Request;
 Route::post('register', 'Auth\AuthController@register');
 
 Route::middleware('auth:api')->group(function () {
-
+	Route::resource('conversations', 'ConversationsController', ['except' => ['create', 'edit']]);
 });
