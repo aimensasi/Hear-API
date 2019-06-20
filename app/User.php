@@ -52,4 +52,9 @@ class User extends Authenticatable{
 			$user->password = Hash::make($user->password);
     });
   }
+
+
+	public function conversations(){
+		return $this->hasMany('App\Conversation', 'owner_id');
+	}
 }
