@@ -21,4 +21,8 @@ class Conversation extends Model{
 		return $this->belongsTo('App\User', 'owner_id');
 	}
 
+	public function messages(){
+		return $this->hasMany('App\Message');
+	}
+
 }

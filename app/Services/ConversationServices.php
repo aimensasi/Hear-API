@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class ConversationServices extends TransformerService {
 
+	protected $messageServices;
+
+	public function __construct(MessageServices $messageServices){
+		$this->messageServices = $messageServices;
+	}
+
 	public function all(Request $request){
 		$conversations = Conversation::where('owner_id', $request->user()->id)->orderBy('created_at', 'desc')->get();
 
@@ -15,8 +21,10 @@ class ConversationServices extends TransformerService {
 	}
 
 	public function show(Conversation $conversation){
+		$result = $this->transform($conversation);
 
-		return $this->transform($conversation);
+		$result['messages'] = $this->messageServices->transformCollection($conversation->messages);
+		return $result;
 	}
 
 	public function store(Request $request){
