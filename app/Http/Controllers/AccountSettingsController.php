@@ -24,7 +24,7 @@ class AccountSettingsController extends Controller{
 			$current_user->language = $request->language;
 		}
 
-		if ($request->has("current_password")) {
+		if ($request->has("current_password") && $request->current_password != '') {
 			$request->validate([
 				"current_password" => "required|min:6",
 				"password" => "required|confirmed|min:6",
