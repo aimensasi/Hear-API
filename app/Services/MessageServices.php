@@ -17,8 +17,12 @@ class MessageServices extends TransformerService {
 		$message = Message::create([
 			"message" => $request->message,
 			"conversation_id" => $conversation->id,
-			"owner_id" => $request->owner_id
 		]);
+
+		if ($request->mine == true) {
+			$message->owner_id = $conversation->owner_id;
+			$message->save();
+		}
 
 		return $this->transform($message);
 	}

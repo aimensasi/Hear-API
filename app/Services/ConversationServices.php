@@ -59,6 +59,7 @@ class ConversationServices extends TransformerService {
 		return [
 			"id" => $conversation->id,
 			"name" => $conversation->name,
+			"owner_id" $conversation->owner_id,
 			"display_name" => $conversation->name . " " . date_to_human($conversation->created_at),
 			"language" => $conversation->language ? $conversation->language : $conversation->owner->language,
 			"created_at" => $conversation->created_at,
